@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "khonvo_challenge",
+  "version": "1.0",
+  "icons": {
+    "128": "resources/list-out-128.png",
+    "48": "resources/list-out-48.png",
+    "16": "resources/list-out-16.png"
+  },
+  "web_accessible_resources": ["index.html"],
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["js/content.js"]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "resources/list-out-16.png"
+  },
+  "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'"
+}

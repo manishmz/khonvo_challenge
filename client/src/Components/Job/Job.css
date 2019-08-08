@@ -1,0 +1,25 @@
+.content {
+  padding: 0px 10px;
+  padding-top: 20px;
+}
+
+.table {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.table-header {
+  padding: 1em;
+}
+.row > div {
+  padding: 1em;
+  border-top: #333 1px solid;
+}
+.row {
+  display: contents;
+}
+
+.row:hover div {
+  background-color: lightgrey;
+  cursor: pointer;
+}
