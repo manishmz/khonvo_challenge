@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import Button from "../../../CommonComponents/Button/Button";
 import "./AddJob.css";
-import { useFormInput } from "../../../customHooks";
+import { useFormInput } from "../../../CustomHooks";
 import { API_URL } from "./../../../config";
 
 const AddJob = props => {
@@ -35,11 +35,10 @@ const AddJob = props => {
 
   return (
     <Fragment>
-      <div className="header">ADD JOB</div>
       <div className="container">
         <div>
           <a href="#" onClick={props.goToJobScreen}>
-            Back
+            ⬅ Back
           </a>
         </div>
         <form onSubmit={handleFormSubmit}>
@@ -50,11 +49,18 @@ const AddJob = props => {
               maxLength="100"
               type="text"
               {...companyName}
+              required
             />
           </div>
           <div className="form-input">
             <label> Job Title</label>
-            <input name="jobTitle" maxLength="50" type="text" {...jobTitle} />
+            <input
+              name="jobTitle"
+              maxLength="50"
+              type="text"
+              {...jobTitle}
+              required
+            />
           </div>
           <div className="form-input">
             <label> Job Description</label>
@@ -72,6 +78,7 @@ const AddJob = props => {
               maxLength="50"
               type="text"
               {...hiringManagerName}
+              required
             />
           </div>
           <div className="form-input">
@@ -81,6 +88,7 @@ const AddJob = props => {
               type="email"
               maxLength="50"
               {...hiringManagerEmail}
+              required
             />
           </div>
           <Button type="submit">Add Job</Button>

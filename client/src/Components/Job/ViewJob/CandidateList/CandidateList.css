@@ -1,0 +1,16 @@
+.candidate-table {
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+
+.candidate-table > div {
+  overflow-wrap: break-word;
+  padding: 0.5em;
+}
+.ct-header {
+  font-weight: bold;
+}
+
+select {
+  padding: 5px;
+}

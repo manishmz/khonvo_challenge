@@ -1,0 +1,17 @@
+.dcontainer {
+  color: white;
+}
+.badge {
+  display: inline-block;
+  margin: 5px 0px;
+  margin-right: 5px;
+  background-color: #35b0ab;
+  padding: 5px 5px;
+  border-radius: 4px;
+}
+.count {
+  background-color: #f34573;
+  margin-left: 5px;
+  padding: 0px 5px;
+  border-radius: 8px;
+}

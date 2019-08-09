@@ -6,7 +6,14 @@ const JobSchema = mongoose.Schema({
   jobTitle: { type: String, require: true },
   jobDescription: { type: String },
   hiringManagerName: { type: String },
-  hiringManagerEmail: { type: String }
+  hiringManagerEmail: { type: String },
+  candidates: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CandidateStatus",
+      default: []
+    }
+  ]
 });
 
 module.exports = mongoose.model("Job", JobSchema);

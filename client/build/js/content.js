@@ -11,7 +11,7 @@ iframe.style.width = "0px";
 iframe.style.position = "fixed";
 iframe.style.top = "0px";
 iframe.style.right = "0px";
-iframe.style.zIndex = "99999999999";
+iframe.style.zIndex = "9999999";
 iframe.frameBorder = "none";
 iframe.src = chrome.extension.getURL("index.html");
 
