@@ -44,9 +44,15 @@ const getJobList = async (req, res) => {
         }
       ]
     };
+    const perPage = 20;
+    const page = req.query.page;
+
     const jobList = await Job.find(queryOption)
-      .select("-_id id companyName jobTitle candidates")
-      .populate("candidates", "-_id stage");
+      .select("_id id companyName jobTitle candidates")
+      .populate("candidates", "-_id stage")
+      .skip(perPage * page)
+      .limit(perPage)
+      .sort({ _id: -1 });
     const pipeLineForecastList = jobList.map(job => {
       return {
         id: job.id,

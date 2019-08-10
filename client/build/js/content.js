@@ -6,6 +6,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender) {
 
 var iframe = document.createElement("iframe");
 iframe.style.background = "white";
+iframe.style.transition = "0.2s";
 iframe.style.height = "100%";
 iframe.style.width = "0px";
 iframe.style.position = "fixed";

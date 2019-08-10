@@ -5,6 +5,7 @@ import { API_URL } from "./../../config";
 
 const Job = props => {
   const [jobList, setJobList] = useState([]);
+  const [page, setPage] = useState(0);
   const [searchKey, setSearchKey] = useState("");
   useEffect(() => {
     getJobList();
@@ -14,11 +15,23 @@ const Job = props => {
     props.goToJobDetails(id);
   };
 
-  const getJobList = async () => {
-    const response = await fetch(`${API_URL}/job/list?searchKey=${searchKey}`);
+  const getJobList = async (appendData = false) => {
+    const response = await fetch(
+      `${API_URL}/job/list?searchKey=${searchKey}&&page=${
+        appendData ? page : 0
+      }`
+    );
     const result = await response.json();
     if (result.status === "SUCCESS") {
-      setJobList(result.data);
+      if (result.data.length > 0) {
+        setPage(page + 1);
+      }
+      if (appendData) {
+        setJobList(jobList.concat(result.data));
+      } else {
+        setPage(1);
+        setJobList(result.data);
+      }
     }
   };
   const handleAddJobClick = () => {
@@ -43,11 +56,23 @@ const Job = props => {
       </div>
     );
   });
+
+  window.onscroll = () => {
+    if (
+      parseInt(window.innerHeight + document.documentElement.scrollTop) ===
+      document.documentElement.offsetHeight - 1
+    ) {
+      getJobList(true);
+    }
+  };
+
   return (
     <Fragment>
       <div className="header">
-        <Button onClick={handleAddJobClick}>Add New Job</Button>
-        <div className="search-container  form-input">
+        <Button onClick={handleAddJobClick} className="addButton">
+          Add New Job
+        </Button>
+        <div className="form-input">
           <input
             type="text"
             className="job-search"

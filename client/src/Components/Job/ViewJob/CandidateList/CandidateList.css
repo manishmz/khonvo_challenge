@@ -14,3 +14,16 @@
 select {
   padding: 5px;
 }
+.search-input {
+  width: 97% !important;
+}
+.tag-input {
+  width: 78% !important;
+}
+.tag-button {
+  margin: 10px 0;
+  margin-left: 10px;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}

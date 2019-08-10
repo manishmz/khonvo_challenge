@@ -29,7 +29,7 @@ const ViewJob = props => {
 
   return (
     <Fragment>
-      <div className="content">
+      <div className="container">
         <div>
           <a href="#" onClick={props.goToJobScreen}>
             ⬅ Back

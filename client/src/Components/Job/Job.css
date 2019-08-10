@@ -2,7 +2,9 @@
   padding: 0px 10px;
   padding-top: 20px;
 }
-
+.container {
+  padding: 8px 10px;
+}
 .table {
   display: grid;
   grid-template-columns: 40% 40% 20%;
@@ -25,10 +27,12 @@
   cursor: pointer;
 }
 
-.search-container {
-  display: inline-block;
-  margin-left: 30px;
-}
 .job-search {
   padding-left: 5px !important;
+  width: 60% !important;
+  margin: 5px 0;
+}
+.addButton {
+  float: left;
+  margin-right: 10px !important;
 }

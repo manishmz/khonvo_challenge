@@ -88,9 +88,19 @@ const CandidateList = props => {
     ];
   });
 
+  const handleTagInputKeyPress = event => {
+    if (event.keyCode === 13 && isValidEmail(candidateEmail)) {
+      handleCandidateTag();
+    }
+  };
+
+  const isValidEmail = email => {
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return emailRegex.test(email) ? true : false;
+  };
   return (
     <Fragment>
-      <div className="form-input margin-15">
+      <div className="form-input margin-top-10">
         <input
           type="email"
           className="tag-input"
@@ -98,6 +108,7 @@ const CandidateList = props => {
           name="tag"
           value={candidateEmail}
           onChange={event => setCandidateEmail(event.target.value)}
+          onKeyDown={handleTagInputKeyPress}
         />
         <Button className="tag-button" onClick={handleCandidateTag}>
           @Tag
@@ -109,10 +120,9 @@ const CandidateList = props => {
           value={searchKey}
           onChange={handleSearchChange}
           placeholder="Search for candidate by email, stage"
-          className="tag-input"
+          className="search-input"
         />
       </div>
-
       <div className="candidate-table">
         <div className="ct-header">Candidate Email</div>
         <div className="ct-header">Stage</div>
