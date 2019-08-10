@@ -1,13 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  forwardRef,
+  useImperativeHandle
+} from "react";
 import "./Dashboard.css";
 import { API_URL } from "./../../../../config";
 import { READABLE_STAGES } from "./../../../../constants";
 
-const Dashboard = props => {
+const Dashboard = forwardRef((props, ref) => {
   const [dashboardData, setDashboardData] = useState([]);
+  const [
+    pipelineForecastProbability,
+    setPipelineForecastProbability
+  ] = useState(0);
   useEffect(() => {
     fetchDashboardData();
   }, [props]);
+
+  useImperativeHandle(ref, () => ({
+    refreshDashboard() {
+      fetchDashboardData();
+    }
+  }));
 
   const fetchDashboardData = async () => {
     const response = await fetch(
@@ -16,9 +31,14 @@ const Dashboard = props => {
     const result = await response.json();
     if (result.status === "SUCCESS") {
       const data = {};
-      result.data.map(element => {
+      const { stages, pipelineForecast } = result.data;
+
+      stages.map(element => {
         data[element._id.stage] = element.count;
       });
+      if (pipelineForecast) {
+        setPipelineForecastProbability(pipelineForecast);
+      }
       setDashboardData(data);
     }
   };
@@ -34,7 +54,16 @@ const Dashboard = props => {
     );
     domData.push(ele);
   }
-  return <div className="dcontainer">{domData}</div>;
-};
+  return (
+    <div className="dcontainer">
+      <div className="badge">
+        Pipeline Forecast{" "}
+        <span className="count">${pipelineForecastProbability}</span>
+      </div>
+      <br />
+      {domData}
+    </div>
+  );
+});
 
 export default Dashboard;

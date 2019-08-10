@@ -2,6 +2,10 @@ const response = require("./../config/response");
 const CandidateStatus = require("./../models/CandidateStatus");
 const Job = require("./../models/Job");
 const shortId = require("shortid");
+const {
+  PER_JOB_AMOUNT,
+  FORECAST_PROBABILITY_PERCENTAGE
+} = require("./../constants");
 
 const tagCandidate = async (req, res) => {
   const data = req.body;
@@ -115,7 +119,12 @@ const getDashboard = async (req, res) => {
       }
     ]);
     if (candidates) {
-      res.send(response("SUCCESS", candidates));
+      res.send(
+        response("SUCCESS", {
+          stages: candidates,
+          pipelineForecast: _calculatePipelineForeCast(candidates)
+        })
+      );
       return;
     }
     res.send(response("FAILED", "Unable to fetch data"));
@@ -123,6 +132,19 @@ const getDashboard = async (req, res) => {
     console.log(exception);
     res.send(response("FAILED", "Server error occurred"));
   }
+};
+
+const _calculatePipelineForeCast = arr => {
+  return arr.reduce((acc, data) => {
+    acc +=
+      parseFloat(
+        (
+          (FORECAST_PROBABILITY_PERCENTAGE[data._id.stage] / 100) *
+          PER_JOB_AMOUNT
+        ).toFixed(2)
+      ) * data.count;
+    return acc;
+  }, 0);
 };
 
 module.exports = { tagCandidate, getList, updateStage, getDashboard };

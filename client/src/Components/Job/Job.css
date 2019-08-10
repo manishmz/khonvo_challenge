@@ -17,6 +17,7 @@
 .row > div {
   padding: 0.5em 0;
   border-top: #35b0ab 1px solid;
+  padding-right: 2px;
 }
 .row {
   display: contents;

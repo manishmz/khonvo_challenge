@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import "./ViewJob.css";
 import { API_URL } from "./../../../config";
 import CandidateList from "./CandidateList/CandidateList";
@@ -14,7 +14,7 @@ const ViewJob = props => {
     hiringManagerEmail: ""
   };
   const [jobDetails, setJobDetails] = useState(initialJobDetails);
-
+  const dashboardRef = useRef();
   useEffect(() => {
     fetchJobDetails();
   }, [props]);
@@ -27,6 +27,7 @@ const ViewJob = props => {
     }
   };
 
+  const refreshDashboard = () => dashboardRef.current.refreshDashboard();
   return (
     <Fragment>
       <div className="container">
@@ -36,7 +37,7 @@ const ViewJob = props => {
           </a>
         </div>
         <Collapsible header="Dashboard">
-          <Dashboard jobId={props.jobId} />
+          <Dashboard jobId={props.jobId} ref={dashboardRef} />
         </Collapsible>
         <Collapsible header="Job Details">
           <div className="grid">
@@ -52,7 +53,10 @@ const ViewJob = props => {
             <div className="text-value">{jobDetails.hiringManagerEmail}</div>
           </div>
         </Collapsible>
-        <CandidateList jobId={props.jobId} />
+        <CandidateList
+          jobId={props.jobId}
+          refreshDashboard={refreshDashboard}
+        />
       </div>
     </Fragment>
   );

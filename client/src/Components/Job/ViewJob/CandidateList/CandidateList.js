@@ -33,6 +33,7 @@ const CandidateList = props => {
     if (result.status === "SUCCESS") {
       setCandidateEmail("");
       fetchCandidatesList();
+      props.refreshDashboard();
     }
   };
 
@@ -58,6 +59,7 @@ const CandidateList = props => {
       body: JSON.stringify(data)
     });
     fetchCandidatesList();
+    props.refreshDashboard();
   };
 
   const handleSearchChange = event => {
