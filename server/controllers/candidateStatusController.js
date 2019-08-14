@@ -89,7 +89,7 @@ const getList = async (req, res) => {
 
 const updateStage = async (req, res) => {
   try {
-    const candidateId = req.query.id;
+    const candidateId = req.params.candidateId;
     const updatedStage = req.body.stage;
     const candidate = await CandidateStatus.update(
       { id: candidateId },

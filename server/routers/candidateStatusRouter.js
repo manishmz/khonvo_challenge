@@ -4,6 +4,6 @@ const candidateStatusController = require("./../controllers/candidateStatusContr
 const router = express.Router();
 router.post("/tag", candidateStatusController.tagCandidate);
 router.get("/list", candidateStatusController.getList);
-router.post("/update/stage", candidateStatusController.updateStage);
+router.put("/update/stage/:candidateId", candidateStatusController.updateStage);
 router.get("/dashboard/:jobId", candidateStatusController.getDashboard);
 module.exports = router;

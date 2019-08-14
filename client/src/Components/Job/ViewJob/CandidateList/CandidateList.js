@@ -51,8 +51,8 @@ const CandidateList = props => {
     const data = {
       stage: updatedStage
     };
-    const response = await fetch(`${API_URL}/candidate/update/stage?id=${id}`, {
-      method: "POST",
+    const response = await fetch(`${API_URL}/candidate/update/stage/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
